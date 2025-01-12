@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "test:file": "node src/__test__/framework/exec.js"
+  },
   "devDependencies": {
     "typescript": "^5.7.3"
   }
