@@ -1,6 +1,6 @@
 type Node<T> = {
     value: T,
-    prev: Node<T> | undefined;
+    next: Node<T> | undefined;
 }
 
 export default class Queue<T> {
@@ -15,14 +15,14 @@ export default class Queue<T> {
 
     enqueue(value: T): void {
         this.length++;
-        const node: Node<T> = { value, prev: undefined };
+        const node: Node<T> = { value, next: undefined };
 
         if (this.tail === undefined) {
             this.head = this.tail = node;
             return;
         }
 
-        this.tail.prev = node;
+        this.tail.next = node;
         this.tail = node;
     }
 
@@ -34,7 +34,7 @@ export default class Queue<T> {
         this.length--;
 
         const head = this.head;
-        this.head = this.head?.prev;
+        this.head = this.head?.next;
 
         return head?.value;
     }
