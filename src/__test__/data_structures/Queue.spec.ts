@@ -25,5 +25,21 @@ describe("Queue", [
 
         // Assert
         expect(val).toBe(1);
+    }),
+    test("should keep order of returned values", () => {
+        // Arrange
+        const queue = new Queue<number>();
+
+        // Act
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+
+        const firstVal = queue.dequeue();
+        const secondVal = queue.dequeue();
+
+        // Assert
+        expect(firstVal).toBe(1);
+        expect(secondVal).toBe(2);
     })
 ]);
