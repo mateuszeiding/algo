@@ -14,12 +14,12 @@ type LinkDoubleNode<T> = LinkBaseNode<T, LinkedListEnum.double> & {
     prev: LinkNode<T, LinkedListEnum.double>
 };
 
-export class LinkedList {
+export class LinkedList<T> {
     constructor(type?: LinkedListEnum) {
         return this.createLinkedList(type ?? LinkedListEnum.single);
     }
 
-    private createLinkedList(type: LinkedListEnum): LinkedListSingle | LinkedListDouble {
+    private createLinkedList(type: LinkedListEnum): LinkedListSingle<T> | LinkedListDouble<T> {
         switch(type) {
             case LinkedListEnum.single: return new LinkedListSingle();
             case LinkedListEnum.double: return new LinkedListDouble();
@@ -29,23 +29,24 @@ export class LinkedList {
     }
 }
 
-class LinkedListSingle<T> {
+class LinkedListSingle<T> extends LinkedList<T> {
     length: number;
     current: LinkNode<T, LinkedListEnum.single> | undefined;
 
     constructor() {
+        super();
         this.length = 0;
         this.current = undefined;
     }
 }
 
-class LinkedListDouble<T> {
+class LinkedListDouble<T> extends LinkedList<T> {
     length: number;
     current: LinkNode<T, LinkedListEnum.double> | undefined;
 
     constructor() {
+        super();
         this.length = 0;
         this.current = undefined;
     }
-
 }
