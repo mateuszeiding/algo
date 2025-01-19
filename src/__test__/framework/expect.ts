@@ -1,8 +1,13 @@
 type Expect = {
     not?: Expect,
+    fn?: FnCall,
     toExist: () => void,
     toBe: (expected: unknown) => void,
 }
+
+type FnCall = {
+    toThrow: (message: string) => void,
+};
 
 export function expect(actual: unknown, not: boolean = false): Expect {
     const isNegated = (checkResult: boolean, addText: string) => {
@@ -34,6 +39,7 @@ export function expect(actual: unknown, not: boolean = false): Expect {
 
     return {
         ...(!not && {not: expect(actual, true)}),
+        ...(typeof actual === "function" && {fn: fnCall(actual)}),
         toExist() {
             const { val, text } = isNegated(actual == null, "not to ");
             if (val) {
@@ -45,6 +51,28 @@ export function expect(actual: unknown, not: boolean = false): Expect {
             if (val) {
                 throw Error(`expected ${format(actual)} to ${text}be ${format(expected)}`);
             }
+        },
+    };
+}
+
+function fnCall(fn: Function): FnCall {
+    return {
+        toThrow: (message: string) => {
+            let messageThrowed = "";
+            try {
+                fn();
+            } catch(e) {
+                if (e instanceof Error) {
+                    if (e.message === message) {
+                        return;
+                    } else {
+                        messageThrowed = e.message;
+                    }
+                }
+            }
+
+            const mt = messageThrowed.length ? ` but got "${messageThrowed}"` : "";
+            throw Error(`expected error with "${message}" message${mt}`);
         }
     }
 }

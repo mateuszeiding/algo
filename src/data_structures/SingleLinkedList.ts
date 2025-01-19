@@ -13,7 +13,7 @@ interface ISingleLinkedList<T> {
     get(index: number): T | undefined;
 }
 
-class SingleLinkedList<T> implements ISingleLinkedList<T> {
+export default class SingleLinkedList<T> implements ISingleLinkedList<T> {
     public length: number;
     private head?: SingleLinkNode<T> | undefined;
 
@@ -23,46 +23,47 @@ class SingleLinkedList<T> implements ISingleLinkedList<T> {
     }
 
     insertAt(item: T, index: number): void {
-        if (index > this.length + 1) {
+        if (index > this.length) {
             throw Error("Index out of range");
         }
 
         if (index === 0) {
             this.prepend(item);
-        } else if (this.length + 1 === index) {
+        } else if (this.length === index) {
             this.append(item);
         }
 
         let curr = this.head;
-        for (let i = 0; curr && i < index; i++) {
+        for (let i = 0; curr && i < index - 1; i++) {
             curr = curr?.next;
         }
 
+        this.length++;
         curr = curr as SingleLinkNode<T>;
         const node: SingleLinkNode<T> = {value: item, next: undefined};
 
         node.next = curr.next;
         curr.next = node;
-
     };
 
     remove(item: T): T | undefined {
         if (this.head?.value === item) {
+            this.length--;
             const val = this.head.value;
             this.head = this.head.next;
             return val;
         }
 
         let curr = this.head;
-
-        while (curr?.next !== item && curr?.next !== undefined) {
+        while (curr?.next?.value !== item && curr?.next !== undefined) {
             curr = curr?.next;
         }
 
-        if (curr === undefined) {
+        if (curr?.next === undefined) {
             return undefined;
         }
 
+        this.length--;
         const toRemove = curr.next;
         curr.next = toRemove?.next;
 
@@ -70,25 +71,27 @@ class SingleLinkedList<T> implements ISingleLinkedList<T> {
     };
 
     removeAt(index: number): T | undefined {
-        if (index > this.length + 1) {
+        if (index > this.length) {
             throw Error("Index out of range");
         }
 
         if (index === 0) {
+            this.length--;
             const val = this.head?.value;
             this.head = this.head?.next;
             return val;
         }
 
         let curr = this.head;
-        for (let i = 0; curr && i < index; i++) {
+        for (let i = 0; curr && i < index - 1; i++) {
             curr = curr?.next;
         }
 
-        if (curr === undefined) {
+        if (curr?.next === undefined) {
             return undefined;
         }
 
+        this.length--;
         const toRemove = curr.next;
         curr.next = toRemove?.next;
 
@@ -98,6 +101,7 @@ class SingleLinkedList<T> implements ISingleLinkedList<T> {
     append(item: T): void {
         if (this.length === 0) {
             this.prepend(item);
+            return;
         }
 
         const node: SingleLinkNode<T> = {value: item, next: undefined};
@@ -105,10 +109,10 @@ class SingleLinkedList<T> implements ISingleLinkedList<T> {
         this.length++;
         let idx = 0;
         let curr = this.head;
-        do {
+        while (curr?.next !== undefined) {
             curr = curr?.next;
             idx++;
-        } while (idx < this.length);
+        };
 
         curr = curr as SingleLinkNode<T>;
         curr.next = node;
@@ -123,12 +127,15 @@ class SingleLinkedList<T> implements ISingleLinkedList<T> {
             return;
         }
 
-        const curr = this.head;
+        node.next = this.head;
         this.head = node;
-        this.head.next = curr;
     };
 
     get(index: number): T | undefined {
+        if (index === 0) {
+            return this.head?.value;
+        }
+
         let idx = 0;
         let current = this.head;
         do {
