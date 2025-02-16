@@ -4,40 +4,45 @@ type DateInterval = [Date, number];
 // we need to check for all "unique" days at most
 const MAX = 28 * 365.25;
 
+// GIVEN
+// X and Y Dates WHERE X <= Y
+// Xi and Yi intervals
+// n WHERE n = |(X - Y) % Xi|
+// FIND m WHERE n = (Y + (m * X)) % Yi
 export default function overlapingDateInterval(
-	fir: DateInterval,
-	sec: DateInterval,
+	X: DateInterval,
+	Y: DateInterval,
 ) {
 	// earlier date always first
-	if (fir[0] > sec[0]) {
-		return overlapingDateInterval(sec, fir);
+	if (X[0] > Y[0]) {
+		return overlapingDateInterval(Y, X);
 	}
 
-	const daysDiff = getDaysDiff(fir[0], sec[0]);
+	const daysDiff = getDaysDiff(X[0], Y[0]);
 	// overlap on first interval
-	if (daysDiff === fir[1]) {
+	if (daysDiff === X[1]) {
 		console.log(0);
 		return 0;
 	}
 
 	// get smallest diff where fir <= sec && fir + interval >= sec
-	if (daysDiff > fir[1]) {
-		fir[0].setDate(fir[0].getDate() + Math.floor(daysDiff / fir[1]) * fir[1]);
+	if (daysDiff > X[1]) {
+		X[0].setDate(X[0].getDate() + Math.floor(daysDiff / X[1]) * X[1]);
 	}
 
 	let mod: number | undefined;
-	let val = 0;
-	const n = getDaysDiff(fir[0], sec[0]);
-	while (mod !== n && val < MAX) {
-		mod = val % sec[1];
+	let m = 0;
+	const n = getDaysDiff(X[0], Y[0]);
+	while (mod !== n && m < MAX) {
+		mod = m % Y[1];
 
 		if (mod === n) break;
 
-		val = val + fir[1];
+		m = m + X[1];
 	}
-	console.log(n, mod, val);
+	console.log(n, mod, m);
 
-	console.log(val);
+	console.log(m);
 }
 
 function getDaysDiff(date1: Date, date2: Date): number {
