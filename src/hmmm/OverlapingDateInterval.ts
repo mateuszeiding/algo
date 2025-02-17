@@ -4,7 +4,7 @@ type DateInterval = [Date, number];
 // we need to check for all "unique" days at most
 const MAX = 28 * 365.25;
 
-// OK, that was wrong D:
+// Or maybe it's working but I'm not soo good in writing math from my head???
 export default function overlapingDateInterval(
 	X: DateInterval,
 	Y: DateInterval,
@@ -32,9 +32,9 @@ export default function overlapingDateInterval(
 	while (mod !== n && m < MAX) {
 		mod = m % Y[1];
 
-		if (mod === n) break;
-
-		m = m + X[1];
+		if (mod !== n) {
+			m = m + X[1];
+		}
 	}
 	console.log(n, mod, m);
 
