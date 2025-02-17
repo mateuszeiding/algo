@@ -4,21 +4,7 @@ type DateInterval = [Date, number];
 // we need to check for all "unique" days at most
 const MAX = 28 * 365.25;
 
-// GIVEN
-// X and Y Dates WHERE X <= Y
-// Xi and Yi intervals
-// n WHERE n = |(X - Y) % Xi|
-// FIND m WHERE n = (Y + (X * m)) % Yi
-//
-// Why it should work?
-// For two intervals that start from 0 - zero can be any date
-// for simplification starting date doesn't count as overlap
-// When you'll find LCM (Least Common Multiple) you'll find out how may days need to pass for intervals to overlap
-// For 2025-02-10 with intervals 3 and 9 the LCM is 9 so date would be 2025-02-19
-// To find LCM you can check if 3 * m % 9 = 0
-// so if we have any difference on start we need to get this diff as modulo rest so
-// for dates 2025-02-08, 2025-02-10 and the same intervals we need to get
-// 3 * m % 9 = 2
+// OK, that was wrong D:
 export default function overlapingDateInterval(
 	X: DateInterval,
 	Y: DateInterval,
