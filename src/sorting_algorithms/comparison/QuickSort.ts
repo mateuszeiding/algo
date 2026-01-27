@@ -1,4 +1,4 @@
-import { SortingDescriptionBuilder } from "src/utils/SortingDescriptionBuilder";
+import { SortingDescriptionBuilder } from "../../utils/SortingDescriptionBuilder";
 
 SortingDescriptionBuilder.describe("Quick Sort")
 	.best("n log n")

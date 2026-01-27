@@ -1,4 +1,4 @@
-type TName = "Quick Sort";
+type TName = "Quick Sort" | "Buble Sort";
 
 type TMethod =
 	| "Selection"

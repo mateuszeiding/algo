@@ -1,5 +1,6 @@
-import { quickSort } from "../../sorting_algorithms/comparison/QuickSort";
-import { describe, expect, test } from "../framework/index";
+import { bubbleSort } from "../sorting_algorithms/comparison/BubbleSort";
+import { quickSort } from "../sorting_algorithms/comparison/QuickSort";
+import { describe, expect, test } from "./framework/index";
 
 type ValueExpect<T> = {
 	val: T;
@@ -24,17 +25,21 @@ const testCases: ValueExpect<number[]>[] = [
 ];
 // Author: ChatGPT
 
-describe(
-	"Quick Sort",
-	testCases.map((tc) =>
-		test(`should sort ${JSON.stringify(tc.val)}`, () => {
-			// Act
-			quickSort(tc.val);
+const testCase = (title: string, sortFn: <T>(arr: T[]) => void) =>
+	describe(
+		title,
+		testCases.map((tc) =>
+			test(`should sort ${JSON.stringify(tc.val)}`, () => {
+				// Act
+				sortFn(tc.val);
 
-			// Assert
-			tc.val.forEach((v, i) => {
-				expect(v).toBe(tc.ex[i]);
-			});
-		}),
-	),
-);
+				// Assert
+				tc.val.forEach((v, i) => {
+					expect(v).toBe(tc.ex[i]);
+				});
+			}),
+		),
+	);
+
+testCase("Quick Sort", quickSort);
+testCase("Bubble Sort", bubbleSort);
