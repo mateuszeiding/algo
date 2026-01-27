@@ -1,4 +1,5 @@
 import { bubbleSort } from "../sorting_algorithms/comparison/BubbleSort";
+import { cocktailShakerSort } from "../sorting_algorithms/comparison/CocktailShakerSort";
 import { quickSort } from "../sorting_algorithms/comparison/QuickSort";
 import { describe, expect, test } from "./framework/index";
 
@@ -43,3 +44,4 @@ const testCase = (title: string, sortFn: <T>(arr: T[]) => void) =>
 
 testCase("Quick Sort", quickSort);
 testCase("Bubble Sort", bubbleSort);
+testCase("Cocktail Shaker Sort", cocktailShakerSort);

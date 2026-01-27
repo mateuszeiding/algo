@@ -1,4 +1,4 @@
-type TName = "Quick Sort" | "Buble Sort";
+type TName = "Quick Sort" | "Buble Sort" | "Cocktail Shaker Sort";
 
 type TMethod =
 	| "Selection"
