@@ -3,7 +3,7 @@
     "test:file": "node src/__test__/framework/exec.js"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "typescript": "^5.7.3"
+    "@biomejs/biome": "2.3.13",
+    "typescript": "^5.9.3"
   }
 }
