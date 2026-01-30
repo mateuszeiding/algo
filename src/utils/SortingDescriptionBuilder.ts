@@ -3,7 +3,8 @@ export type TName =
 	| "Bubble Sort"
 	| "Cocktail Shaker Sort"
 	| "Gnome Sort"
-	| "Selection Sort";
+	| "Selection Sort"
+	| "Exchange Sort";
 
 type TMethod =
 	| "Selection"

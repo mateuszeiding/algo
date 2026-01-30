@@ -1,5 +1,6 @@
 import { bubbleSort } from "../sorting_algorithms/comparison/BubbleSort";
 import { cocktailShakerSort } from "../sorting_algorithms/comparison/CocktailShakerSort";
+import { exchangeSort } from "../sorting_algorithms/comparison/ExchangeSort";
 import { gnomeSort } from "../sorting_algorithms/comparison/GnomeSort";
 import { quickSort } from "../sorting_algorithms/comparison/QuickSort";
 import { selectionSort } from "../sorting_algorithms/comparison/SelectionSort";
@@ -49,3 +50,4 @@ testCase("Bubble Sort", bubbleSort);
 testCase("Cocktail Shaker Sort", cocktailShakerSort);
 testCase("Gnome Sort", gnomeSort);
 testCase("Selection Sort", selectionSort);
+testCase("Exchange Sort", exchangeSort);

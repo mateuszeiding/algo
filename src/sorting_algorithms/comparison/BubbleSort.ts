@@ -10,21 +10,21 @@ SortingDescriptionBuilder.describe("Bubble Sort")
 	.method("Exchanging");
 
 export function bubbleSort<T>(arr: T[]) {
-	let n = arr.length;
+	let len = arr.length;
 
 	do {
-		let newn = 0;
+		let newLen = 0;
 
-		for (let i = 1; i <= n - 1; i++) {
+		for (let i = 1; i <= len - 1; i++) {
 			if (arr[i - 1] > arr[i]) {
 				const t = arr[i - 1];
 				arr[i - 1] = arr[i];
 				arr[i] = t;
 
-				newn = i;
+				newLen = i;
 			}
 		}
 
-		n = newn;
-	} while (n > 0);
+		len = newLen;
+	} while (len > 0);
 }

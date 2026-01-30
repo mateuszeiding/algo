@@ -10,10 +10,12 @@ SortingDescriptionBuilder.describe("Selection Sort")
 	.method("Selection");
 
 export function selectionSort<T>(arr: T[]) {
-	for (let i = 0; i < arr.length; i++) {
+	const len = arr.length;
+
+	for (let i = 0; i < len; i++) {
 		let min = i;
 
-		for (let j = i + 1; j < arr.length; j++) {
+		for (let j = i + 1; j < len; j++) {
 			if (arr[j] < arr[min]) {
 				min = j;
 			}
