@@ -2,13 +2,14 @@ import { bubbleSort } from "../sorting_algorithms/comparison/BubbleSort";
 import { cocktailShakerSort } from "../sorting_algorithms/comparison/CocktailShakerSort";
 import { gnomeSort } from "../sorting_algorithms/comparison/GnomeSort";
 import { quickSort } from "../sorting_algorithms/comparison/QuickSort";
+import { selectionSort } from "../sorting_algorithms/comparison/SelectionSort";
+import type { TName as SortingName } from "../utils/SortingDescriptionBuilder";
 import { describe, expect, test } from "./framework/index";
 
 type ValueExpect<T> = {
 	val: T;
 	ex: T;
 };
-
 // Author: ChatGPT
 const testCases: ValueExpect<number[]>[] = [
 	{ val: [3, 1, 4, 1, 5, 9], ex: [1, 1, 3, 4, 5, 9] },
@@ -27,7 +28,7 @@ const testCases: ValueExpect<number[]>[] = [
 ];
 // Author: ChatGPT
 
-const testCase = (title: string, sortFn: <T>(arr: T[]) => void) =>
+const testCase = (title: SortingName, sortFn: <T>(arr: T[]) => void) =>
 	describe(
 		title,
 		testCases.map((tc) =>
@@ -47,3 +48,4 @@ testCase("Quick Sort", quickSort);
 testCase("Bubble Sort", bubbleSort);
 testCase("Cocktail Shaker Sort", cocktailShakerSort);
 testCase("Gnome Sort", gnomeSort);
+testCase("Selection Sort", selectionSort);

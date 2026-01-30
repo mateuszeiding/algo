@@ -1,6 +1,6 @@
 import { SortingDescriptionBuilder } from "../../utils/SortingDescriptionBuilder";
 
-SortingDescriptionBuilder.describe("Buble Sort")
+SortingDescriptionBuilder.describe("Bubble Sort")
 	.best("n")
 	.average("n^2")
 	.worst("n^2")

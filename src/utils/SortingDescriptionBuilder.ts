@@ -1,8 +1,9 @@
-type TName =
+export type TName =
 	| "Quick Sort"
-	| "Buble Sort"
+	| "Bubble Sort"
 	| "Cocktail Shaker Sort"
-	| "Gnome Sort";
+	| "Gnome Sort"
+	| "Selection Sort";
 
 type TMethod =
 	| "Selection"
